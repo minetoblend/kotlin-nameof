@@ -1,0 +1,4 @@
+public final class com/osucad/nameof/NameOfKt {
+	public static final fun nameOf (Ljava/lang/Object;)Ljava/lang/String;
+}
+

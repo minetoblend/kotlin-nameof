@@ -8,6 +8,4 @@ import org.jetbrains.kotlin.fir.analysis.extensions.FirAdditionalCheckersExtensi
 internal class NameOfCheckerExtension(session: FirSession) : FirAdditionalCheckersExtension(session) {
     override val expressionCheckers: ExpressionCheckers
         get() = NameOfExpressionCheckers()
-
-
 }

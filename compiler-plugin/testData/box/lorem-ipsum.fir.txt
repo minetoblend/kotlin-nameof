@@ -1,0 +1,19 @@
+FILE: lorem-ipsum.kt
+    package com.osucad.nameof
+
+    public final fun nameOf(value: R|kotlin/Any?|): R|kotlin/String| {
+        ^nameOf String()
+    }
+    public final fun box(): R|kotlin/String| {
+        lval Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua: R|kotlin/String| = String(bar)
+        lval result: R|kotlin/String| = R|com/osucad/nameof/nameOf|(R|<local>/Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua|)
+        ^box when () {
+            ==(R|<local>/result|, String(Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua)) ->  {
+                String(OK)
+            }
+            else ->  {
+                <strcat>(String(Fail: ), R|<local>/result|)
+            }
+        }
+
+    }

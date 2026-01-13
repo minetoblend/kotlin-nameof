@@ -40,6 +40,12 @@ public class JvmBoxTestGenerated extends AbstractJvmBoxTest {
   }
 
   @Test
+  @TestMetadata("lorem-ipsum.kt")
+  public void testLorem_ipsum() {
+    runTest("compiler-plugin/testData/box/lorem-ipsum.kt");
+  }
+
+  @Test
   @TestMetadata("nameof-nullable-type.kt")
   public void testNameof_nullable_type() {
     runTest("compiler-plugin/testData/box/nameof-nullable-type.kt");

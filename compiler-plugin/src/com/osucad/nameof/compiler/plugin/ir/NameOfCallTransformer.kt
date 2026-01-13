@@ -2,21 +2,15 @@ package com.osucad.nameof.compiler.plugin.ir
 
 import org.jetbrains.kotlin.backend.common.IrElementTransformerVoidWithContext
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
-import org.jetbrains.kotlin.ir.expressions.IrCall
-import org.jetbrains.kotlin.ir.expressions.IrConstKind
-import org.jetbrains.kotlin.ir.expressions.IrDeclarationReference
-import org.jetbrains.kotlin.ir.expressions.IrExpression
-import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithName
+import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
 import org.jetbrains.kotlin.ir.types.classFqName
 import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.name.FqName
 
-class NameOfCallTransformer(
-    private val sourceFile: SourceFile,
-    private val context: IrPluginContext,
-) : IrElementTransformerVoidWithContext() {
+class NameOfCallTransformer(context: IrPluginContext) : IrElementTransformerVoidWithContext() {
     private val irBuiltIns = context.irBuiltIns
 
     private val nameOfFqn = FqName("com.osucad.nameof.nameOf")
@@ -35,12 +29,15 @@ class NameOfCallTransformer(
 
     private fun getArgumentName(call: IrCall): String? {
         if (call.typeArguments.isNotEmpty()) {
-            val typeArgument = call.typeArguments.single()!!
+            val typeArgument = call.typeArguments[0] ?: return null
 
             val nullable = typeArgument.isNullable()
-            val typeName = typeArgument.classFqName!!.shortName().asString()
+            val typeName = typeArgument.classFqName?.shortName()?.asString() ?: return null
 
-            return if (nullable) "$typeName?" else typeName
+            return when {
+                nullable -> "$typeName?"
+                else -> typeName
+            }
         }
 
         return when (val argument = call.arguments.single()) {
@@ -48,9 +45,9 @@ class NameOfCallTransformer(
                 argument.symbol.owner.name.asString()
 
             is IrDeclarationReference -> {
-                val sourceRangeInfo = sourceFile.getSourceRangeInfo(argument)
+                val owner = argument.symbol.owner as? IrDeclarationWithName ?: return null
 
-                sourceFile.getText(sourceRangeInfo)
+                owner.name.asString()
             }
 
             else -> null

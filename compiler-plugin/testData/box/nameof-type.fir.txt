@@ -1,0 +1,28 @@
+FILE: nameof-type.kt
+    package com.osucad.nameof
+
+    public final inline fun <reified T : R|kotlin/Any|> nameOf(): R|kotlin/String| {
+        ^nameOf String()
+    }
+    public final fun box(): R|kotlin/String| {
+        local final class Foo : R|kotlin/Any| {
+            public constructor(): R|<local>/Foo| {
+                super<R|kotlin/Any|>()
+            }
+
+            public final val foo: R|kotlin/String| = String(foo)
+                public get(): R|kotlin/String|
+
+        }
+
+        lval result: R|kotlin/String| = R|com/osucad/nameof/nameOf|<R|<local>/Foo|>()
+        ^box when () {
+            ==(R|<local>/result|, String(Foo)) ->  {
+                String(OK)
+            }
+            else ->  {
+                <strcat>(String(Fail: ), R|<local>/result|)
+            }
+        }
+
+    }

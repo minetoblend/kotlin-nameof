@@ -1,0 +1,15 @@
+FILE: constant.kt
+    package foo
+
+    public final fun test(): R|kotlin/Unit| {
+        R|com/osucad/nameof/nameOf|(Int(0))
+    }
+    public final annotation class Foo : R|kotlin/Annotation| {
+        public constructor(): R|foo/Foo| {
+            super<R|kotlin/Any|>()
+        }
+
+    }
+    @R|foo/Foo|() public final fun foo(): R|kotlin/String| {
+        ^foo String(bar)
+    }

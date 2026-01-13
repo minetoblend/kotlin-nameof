@@ -1,0 +1,26 @@
+FILE: property-reference.kt
+    package com.osucad.nameof
+
+    public final fun box(): R|kotlin/String| {
+        local final class Foo : R|kotlin/Any| {
+            public constructor(): R|<local>/Foo| {
+                super<R|kotlin/Any|>()
+            }
+
+            public final val foo: R|kotlin/String| = String(foo)
+                public get(): R|kotlin/String|
+
+        }
+
+        lval obj: R|<local>/Foo| = R|<local>/Foo.Foo|()
+        lval result: R|kotlin/String| = R|com/osucad/nameof/nameOf|(R|<local>/obj|::R|<local>/foo|)
+        ^box when () {
+            ==(R|<local>/result|, String(foo)) ->  {
+                String(OK)
+            }
+            else ->  {
+                <strcat>(String(Fail: ), R|<local>/result|)
+            }
+        }
+
+    }

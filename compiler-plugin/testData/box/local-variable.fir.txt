@@ -1,0 +1,19 @@
+FILE: local-variable.kt
+    package com.osucad.nameof
+
+    public final fun nameOf(value: R|kotlin/Any?|): R|kotlin/String| {
+        ^nameOf String()
+    }
+    public final fun box(): R|kotlin/String| {
+        lval foo: R|kotlin/String| = String(bar)
+        lval result: R|kotlin/String| = R|com/osucad/nameof/nameOf|(R|<local>/foo|)
+        ^box when () {
+            ==(R|<local>/result|, String(foo)) ->  {
+                String(OK)
+            }
+            else ->  {
+                <strcat>(String(Fail: ), R|<local>/result|)
+            }
+        }
+
+    }

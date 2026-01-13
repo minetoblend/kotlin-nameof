@@ -1,0 +1,7 @@
+FILE: function-call.kt
+    package foo
+
+    public final fun test(): R|kotlin/Unit| {
+        lval values: R|kotlin/collections/List<kotlin/Int>| = R|kotlin/collections/listOf|<R|kotlin/Int|>(vararg(Int(0), Int(1), Int(2), Int(3)))
+        R|com/osucad/nameof/nameOf|(R|<local>/values|.R|SubstitutionOverride<kotlin/collections/List.indexOf: R|kotlin/Int|>|(Int(0)))
+    }

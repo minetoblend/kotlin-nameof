@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrPropertyReference
 import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
 import org.jetbrains.kotlin.ir.types.classFqName
+import org.jetbrains.kotlin.ir.util.isNullable
 import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.name.FqName
 
@@ -16,9 +17,7 @@ class NameOfCallTransformer(
     private val sourceFile: SourceFile,
     private val context: IrPluginContext,
 ) : IrElementTransformerVoidWithContext() {
-
-    protected val irFactory = context.irFactory
-    protected val irBuiltIns = context.irBuiltIns
+    private val irBuiltIns = context.irBuiltIns
 
     private val nameOfFqn = FqName("com.osucad.nameof.nameOf")
 
@@ -36,9 +35,12 @@ class NameOfCallTransformer(
 
     private fun getArgumentName(call: IrCall): String? {
         if (call.typeArguments.isNotEmpty()) {
-            val typeArgument = call.typeArguments.single()
+            val typeArgument = call.typeArguments.single()!!
 
-            return typeArgument!!.classFqName!!.shortName().asString()
+            val nullable = typeArgument.isNullable()
+            val typeName = typeArgument.classFqName!!.shortName().asString()
+
+            return if (nullable) "$typeName?" else typeName
         }
 
         return when (val argument = call.arguments.single()) {
@@ -54,6 +56,4 @@ class NameOfCallTransformer(
             else -> null
         }
     }
-
-
 }

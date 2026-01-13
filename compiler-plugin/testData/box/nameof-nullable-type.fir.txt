@@ -1,4 +1,4 @@
-FILE: nameof-type.kt
+FILE: nameof-nullable-type.kt
     package com.osucad.nameof
 
     public final inline fun <reified T> nameOf(): R|kotlin/String| {
@@ -15,9 +15,9 @@ FILE: nameof-type.kt
 
         }
 
-        lval result: R|kotlin/String| = R|com/osucad/nameof/nameOf|<R|<local>/Foo|>()
+        lval result: R|kotlin/String| = R|com/osucad/nameof/nameOf|<R|<local>/Foo?|>()
         ^box when () {
-            ==(R|<local>/result|, String(Foo)) ->  {
+            ==(R|<local>/result|, String(Foo?)) ->  {
                 String(OK)
             }
             else ->  {

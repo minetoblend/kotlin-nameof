@@ -9,7 +9,7 @@ fun box(): String {
         val foo: String = "foo"
     }
 
-    val result = nameOf<Foo>()
+    val result = nameOf<Foo?>()
 
-    return if (result == "Foo") "OK" else "Fail: $result"
+    return if (result == "Foo?") "OK" else "Fail: $result"
 }
